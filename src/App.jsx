@@ -1,7 +1,10 @@
+import { RouterProvider } from 'react-router-dom';
+import router from './router/MainRouter';
+
 function App() {
 	return (
 		<>
-			<p className="text-lg underline text-cyan-500">Todolist App - ABP</p>
+			<RouterProvider router={router} />
 		</>
 	);
 }
