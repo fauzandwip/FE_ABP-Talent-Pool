@@ -5,6 +5,8 @@ export default {
 		extend: {
 			colors: {
 				'blue-primary': '#16ABF8',
+				'white-secondary': '#F4F4F4',
+				'gray-primary': '#888888',
 			},
 		},
 	},

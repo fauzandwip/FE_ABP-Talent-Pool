@@ -1,7 +1,10 @@
 const EmptyStateImage = () => {
 	return (
-		<div className="mt-12 flex justify-center">
-			<object data="/icons/activity-empty-state.svg" />
+		<div className="flex justify-center">
+			<object
+				data-cy="activity-empty-state"
+				data="/icons/activity-empty-state.svg"
+			/>
 		</div>
 	);
 };
