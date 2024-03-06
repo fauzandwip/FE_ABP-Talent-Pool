@@ -1,3 +1,5 @@
+import EditButton from './icons/EditButton';
+
 const TodoTitle = () => {
 	return (
 		<h1
@@ -6,10 +8,7 @@ const TodoTitle = () => {
 		>
 			<object data-cy="todo-back-button" data="./icons/todo-back-button.svg" />
 			New Activity
-			<object
-				data-cy="todo-title-edit-button"
-				data="./icons/todo-title-edit-button.svg"
-			/>
+			<EditButton />
 		</h1>
 	);
 };

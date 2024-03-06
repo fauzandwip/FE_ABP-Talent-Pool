@@ -1,5 +1,6 @@
 import AddButton from '../components/AddButton';
 import EmptyStateImage from '../components/EmptyStateImage';
+import TodoList from '../components/TodoList';
 import TodoTitle from '../components/TodoTitle';
 
 const DetailActivity = () => {
@@ -22,10 +23,11 @@ const DetailActivity = () => {
 				</div>
 			</div>
 
-			<EmptyStateImage
+			{/* <EmptyStateImage
 				imageUrl={'./icons/todo-empty-state.svg'}
 				dataCy={'todo-empty-state'}
-			/>
+			/> */}
+			<TodoList />
 		</div>
 	);
 };

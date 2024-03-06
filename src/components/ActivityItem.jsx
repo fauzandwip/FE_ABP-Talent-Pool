@@ -1,3 +1,5 @@
+import DeleteButton from './icons/DeleteButton';
+
 const ActivityItem = () => {
 	return (
 		<div
@@ -12,7 +14,7 @@ const ActivityItem = () => {
 				<p data-cy="activity-item-date" className="text-gray-primary">
 					5 Oktober 2021
 				</p>
-				<object data-cy="activity-item-delete-button" data="/icons/trash.svg" />
+				<DeleteButton />
 			</div>
 		</div>
 	);
