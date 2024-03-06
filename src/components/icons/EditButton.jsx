@@ -1,9 +1,11 @@
-const EditButton = ({ ...props }) => {
+import PropTypes from 'prop-types';
+
+const EditButton = ({ dataCy, ...props }) => {
 	return (
 		<button>
 			<object
 				{...props}
-				data-cy="todo-title-edit-button"
+				data-cy={dataCy}
 				data="./icons/todo-title-edit-button.svg"
 				className="pointer-events-none"
 			/>
@@ -12,3 +14,7 @@ const EditButton = ({ ...props }) => {
 };
 
 export default EditButton;
+
+EditButton.propTypes = {
+	dataCy: PropTypes.string,
+};
