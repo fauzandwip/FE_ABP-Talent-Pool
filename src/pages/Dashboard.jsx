@@ -10,7 +10,11 @@ const Dashboard = () => {
 				<ActivityTitle />
 				<AddButton />
 			</div>
-			{/* <EmptyStateImage /> */}
+
+			<EmptyStateImage
+				dataCy={'activity-empty-state'}
+				imageUrl={'/icons/activity-empty-state.svg'}
+			/>
 			<Activites />
 		</div>
 	);
