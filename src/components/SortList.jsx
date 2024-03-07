@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SortItem from './SortItem';
 
 const SortList = () => {
@@ -20,14 +21,30 @@ const SortList = () => {
 			'data-cy': 'sort-unfinished',
 		},
 	];
+	const [showSortList, setShowSortList] = useState(false);
 
 	return (
-		<ul className=" absolute mt-2 bg-white flex flex-col rounded-md w-[235px] shadow-xl">
-			{sortList.length &&
-				sortList.map((data, index) => {
-					return <SortItem key={index} data={data} index={index} />;
-				})}
-		</ul>
+		<div className=" relative">
+			<button
+				id="sort-btn"
+				data-cy="todo-sort-button"
+				className="p-4 aspect-square rounded-full border border-gray-secondary"
+				onClick={() => setShowSortList(showSortList ? false : true)}
+			>
+				<object
+					data="./icons/tabler_arrows-sort.svg"
+					className=" pointer-events-none"
+				/>
+			</button>
+			{showSortList && (
+				<ul className="absolute mt-2 bg-white rounded-md w-[235px] shadow-xl">
+					{sortList.length &&
+						sortList.map((data, index) => {
+							return <SortItem key={index} data={data} index={index} />;
+						})}
+				</ul>
+			)}
+		</div>
 	);
 };
 

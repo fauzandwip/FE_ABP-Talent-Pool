@@ -5,7 +5,7 @@ import EmptyStateImage from '../components/EmptyStateImage';
 
 const Dashboard = () => {
 	return (
-		<div className=" min-h-screen pt-32">
+		<div className="px-56 min-h-screen pt-32">
 			<div className="flex justify-between w-full mb-12">
 				<ActivityTitle />
 				<AddButton />

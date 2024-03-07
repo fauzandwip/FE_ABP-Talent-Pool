@@ -15,7 +15,7 @@ const Todo = () => {
 					id=""
 					className="w-5 h-5 aspect-square accent-blue-500"
 				/>
-				<div className=" aspect-square w-2 h-2 bg-red-500 rounded-full" />
+				<div className=" aspect-square w-3 h-3 bg-red-500 rounded-full" />
 				<p
 					data-cy="todo-item-priority-indicator"
 					className="text-lg font-medium"
