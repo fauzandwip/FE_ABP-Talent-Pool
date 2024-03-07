@@ -16,7 +16,7 @@ const ModalAddItem = ({ onClickClose }) => {
 					<button data-cy="modal-add-close-button" onClick={onClickClose}>
 						<object
 							data="./icons/modal-add-close-button.svg"
-							className=" pointer-events-none"
+							className=" pointer-events-none w-6 h-6"
 						/>
 					</button>
 				</div>

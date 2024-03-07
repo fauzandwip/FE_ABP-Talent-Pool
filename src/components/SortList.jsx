@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import SortItem from './SortItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { setShowSortList } from '../features/todo/todoSlice';
 
 const SortList = () => {
 	const sortList = [
@@ -21,7 +22,8 @@ const SortList = () => {
 			'data-cy': 'sort-unfinished',
 		},
 	];
-	const [showSortList, setShowSortList] = useState(false);
+	const dispatch = useDispatch();
+	const showSortList = useSelector((state) => state.todo.showSortList);
 
 	return (
 		<div className=" relative">
@@ -29,21 +31,22 @@ const SortList = () => {
 				id="sort-btn"
 				data-cy="todo-sort-button"
 				className="p-4 aspect-square rounded-full border border-gray-secondary"
-				onClick={() => setShowSortList(showSortList ? false : true)}
+				onClick={() => dispatch(setShowSortList())}
 			>
 				<object
 					data="./icons/tabler_arrows-sort.svg"
-					className=" pointer-events-none"
+					className=" pointer-events-none w-6 h-6"
 				/>
 			</button>
-			{showSortList && (
+
+			<div className={showSortList ? '' : 'hidden'}>
 				<ul className="absolute mt-2 bg-white rounded-md w-[235px] shadow-xl">
 					{sortList.length &&
 						sortList.map((data, index) => {
 							return <SortItem key={index} data={data} index={index} />;
 						})}
 				</ul>
-			)}
+			</div>
 		</div>
 	);
 };

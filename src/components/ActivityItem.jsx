@@ -1,6 +1,10 @@
+import { setShowModalDelete } from '../features/activity/activitySlice';
 import DeleteButton from './icons/DeleteButton';
+import { useDispatch } from 'react-redux';
 
 const ActivityItem = () => {
+	const dispatch = useDispatch();
+
 	return (
 		<div
 			data-cy="activity-item-index"
@@ -14,7 +18,7 @@ const ActivityItem = () => {
 				<p data-cy="activity-item-date" className="text-gray-primary">
 					5 Oktober 2021
 				</p>
-				<DeleteButton />
+				<DeleteButton onClick={() => dispatch(setShowModalDelete())} />
 			</div>
 		</div>
 	);

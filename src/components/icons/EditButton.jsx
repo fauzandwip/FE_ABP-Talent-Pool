@@ -7,7 +7,6 @@ const EditButton = ({ dataCy, ...props }) => {
 				{...props}
 				data-cy={dataCy}
 				data="./icons/todo-title-edit-button.svg"
-				className="pointer-events-none"
 			/>
 		</button>
 	);

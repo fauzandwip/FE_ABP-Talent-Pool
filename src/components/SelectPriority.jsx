@@ -45,7 +45,7 @@ const SelectPriority = () => {
 					Pilih priority
 					<object
 						data="./icons/chevron-down.svg"
-						className=" pointer-events-none"
+						className=" pointer-events-none w-6 h-6"
 					/>
 				</div>
 				<ul

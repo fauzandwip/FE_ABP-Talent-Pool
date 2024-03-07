@@ -9,7 +9,7 @@ export default {
 				'blue-primary': '#16ABF8',
 				'white-secondary': '#F4F4F4',
 				'gray-primary': '#888888',
-				'gray-secondary': '##E5E5E5',
+				'gray-secondary': '#E5E5E5',
 			},
 		},
 	},

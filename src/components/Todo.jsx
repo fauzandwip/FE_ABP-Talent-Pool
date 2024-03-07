@@ -1,7 +1,10 @@
+import { setShowModalDelete } from '../features/todo/todoSlice';
 import DeleteButton from './icons/DeleteButton';
 import EditButton from './icons/EditButton';
-
+import { useDispatch } from 'react-redux';
 const Todo = () => {
+	const dispatch = useDispatch();
+
 	return (
 		<div
 			data-cy="todo-item-index"
@@ -24,11 +27,11 @@ const Todo = () => {
 				</p>
 				<EditButton
 					dataCy={'todo-item-edit-button"'}
-					className=" aspect-square w-5"
+					className="w-5 h-5 pointer-events-none"
 				/>
 			</div>
 
-			<DeleteButton />
+			<DeleteButton onClick={() => dispatch(setShowModalDelete())} />
 		</div>
 	);
 };

@@ -11,7 +11,7 @@ const SortItem = ({ data, index }) => {
 				<div className="flex gap-4">
 					<object
 						data={`./icons/sort/${data.iconUrl}`}
-						className=" pointer-events-none"
+						className=" pointer-events-none w-[18px] h-[18px]"
 					/>
 					{data.title}
 				</div>
