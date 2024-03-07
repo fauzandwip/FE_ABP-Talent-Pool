@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 const EmptyStateImage = ({ imageUrl, dataCy }) => {
 	return (
 		<div className="flex justify-center">
-			<object data-cy={dataCy} data={imageUrl} />
+			<img data-cy={dataCy} src={imageUrl} />
 		</div>
 	);
 };

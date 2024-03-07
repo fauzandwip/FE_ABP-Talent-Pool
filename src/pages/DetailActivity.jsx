@@ -1,5 +1,5 @@
 import AddButton from '../components/AddButton';
-import ModalAddItem from '../components/ModalAddItem';
+import ModalFormItem from '../components/ModalFormItem';
 import SortList from '../components/SortList';
 import TodoList from '../components/TodoList';
 import TodoTitle from '../components/TodoTitle';
@@ -8,16 +8,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	setShowModalAdd,
 	setShowModalDelete,
+	setShowModalEdit,
 } from '../features/todo/todoSlice';
 
 const DetailActivity = () => {
 	const dispatch = useDispatch();
-	const { showModalAdd, showModalDelete } = useSelector((state) => state.todo);
+	const { showModalAdd, showModalEdit, showModalDelete } = useSelector(
+		(state) => state.todo
+	);
 
 	return (
 		<div
 			className={`px-56 min-h-screen pt-32 relative ${
-				showModalAdd || showModalDelete ? 'h-screen overflow-hidden' : ''
+				showModalAdd || showModalDelete || setShowModalEdit
+					? 'h-screen overflow-hidden'
+					: ''
 			}`}
 		>
 			<div className="flex justify-between w-full mb-12">
@@ -36,7 +41,11 @@ const DetailActivity = () => {
 			<TodoList />
 
 			<div className={showModalAdd ? '' : 'hidden'}>
-				<ModalAddItem onClickClose={() => dispatch(setShowModalAdd())} />
+				<ModalFormItem onClickClose={() => dispatch(setShowModalAdd())} />
+			</div>
+
+			<div className={showModalEdit ? '' : 'hidden'}>
+				<ModalFormItem onClickClose={() => dispatch(setShowModalEdit())} />
 			</div>
 
 			<div className={showModalDelete ? '' : 'hidden'}>

@@ -13,7 +13,7 @@ const CustomOption = ({ data, index }) => {
 					<div className={`w-3 h-3 rounded-full ${data.color}`}></div>
 					<a className="text-base">{data.title}</a>
 				</div>
-				<object data="./icons/check.svg" />
+				<img src="./icons/check.svg" />
 			</div>
 		</li>
 	);

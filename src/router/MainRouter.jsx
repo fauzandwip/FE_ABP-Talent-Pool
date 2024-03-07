@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import MainLayout from '../layouts/MainLayout';
 import DetailActivity from '../pages/DetailActivity';
-import ModalAddItem from '../components/ModalAddItem';
 
 const router = createBrowserRouter([
 	{

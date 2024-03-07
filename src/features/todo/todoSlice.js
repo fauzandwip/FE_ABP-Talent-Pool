@@ -4,6 +4,7 @@ export const todoSlice = createSlice({
 	name: 'todo',
 	initialState: {
 		showModalAdd: false,
+		showModalEdit: false,
 		showModalDelete: false,
 		showSortList: false,
 	},
@@ -14,13 +15,20 @@ export const todoSlice = createSlice({
 		setShowModalAdd: (state) => {
 			state.showModalAdd = state.showModalAdd ? false : true;
 		},
+		setShowModalEdit: (state) => {
+			state.showModalEdit = state.showModalEdit ? false : true;
+		},
 		setShowSortList: (state) => {
 			state.showSortList = state.showSortList ? false : true;
 		},
 	},
 });
 
-export const { setShowModalAdd, setShowModalDelete, setShowSortList } =
-	todoSlice.actions;
+export const {
+	setShowModalAdd,
+	setShowModalEdit,
+	setShowModalDelete,
+	setShowSortList,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

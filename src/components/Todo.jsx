@@ -1,4 +1,7 @@
-import { setShowModalDelete } from '../features/todo/todoSlice';
+import {
+	setShowModalDelete,
+	setShowModalEdit,
+} from '../features/todo/todoSlice';
 import DeleteButton from './icons/DeleteButton';
 import EditButton from './icons/EditButton';
 import { useDispatch } from 'react-redux';
@@ -26,8 +29,9 @@ const Todo = () => {
 					Todo
 				</p>
 				<EditButton
-					dataCy={'todo-item-edit-button"'}
-					className="w-5 h-5 pointer-events-none"
+					onClick={() => dispatch(setShowModalEdit())}
+					data-cy={'todo-item-edit-button"'}
+					className="w-5 h-5"
 				/>
 			</div>
 

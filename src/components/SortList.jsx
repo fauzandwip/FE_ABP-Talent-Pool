@@ -33,10 +33,7 @@ const SortList = () => {
 				className="p-4 aspect-square rounded-full border border-gray-secondary"
 				onClick={() => dispatch(setShowSortList())}
 			>
-				<object
-					data="./icons/tabler_arrows-sort.svg"
-					className=" pointer-events-none w-6 h-6"
-				/>
+				<img src="./icons/tabler_arrows-sort.svg" className="  w-6 h-6" />
 			</button>
 
 			<div className={showSortList ? '' : 'hidden'}>

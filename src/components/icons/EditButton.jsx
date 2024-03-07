@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
 
-const EditButton = ({ dataCy, ...props }) => {
+const EditButton = ({ ...props }) => {
 	return (
-		<button>
-			<object
-				{...props}
-				data-cy={dataCy}
-				data="./icons/todo-title-edit-button.svg"
-			/>
+		<button {...props}>
+			<img src="./icons/todo-title-edit-button.svg" />
 		</button>
 	);
 };

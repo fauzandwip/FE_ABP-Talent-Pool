@@ -2,7 +2,7 @@ import SaveButton from './SaveButton';
 import SelectPriority from './SelectPriority';
 import PropTypes from 'prop-types';
 
-const ModalAddItem = ({ onClickClose }) => {
+const ModalFormItem = ({ onClickClose }) => {
 	return (
 		<div className="w-full h-screen absolute z-50 bg-gray-800/70 flex justify-center items-center top-0 left-0">
 			<div
@@ -14,9 +14,9 @@ const ModalAddItem = ({ onClickClose }) => {
 						Tambah List Item
 					</h5>
 					<button data-cy="modal-add-close-button" onClick={onClickClose}>
-						<object
-							data="./icons/modal-add-close-button.svg"
-							className=" pointer-events-none w-6 h-6"
+						<img
+							src="./icons/modal-add-close-button.svg"
+							className="  w-6 h-6"
 						/>
 					</button>
 				</div>
@@ -48,8 +48,8 @@ const ModalAddItem = ({ onClickClose }) => {
 	);
 };
 
-export default ModalAddItem;
+export default ModalFormItem;
 
-ModalAddItem.propTypes = {
+ModalFormItem.propTypes = {
 	onClickClose: PropTypes.func,
 };
