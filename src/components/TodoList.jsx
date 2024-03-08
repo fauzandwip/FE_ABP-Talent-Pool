@@ -7,7 +7,7 @@ const TodoList = () => {
 	return (
 		<div className="w-full flex flex-col gap-2.5 pb-10">
 			{detailActivity.todo_items.map((data, index) => {
-				return <Todo key={index} data={data} />;
+				return <Todo key={index} data={data} index={index} />;
 			})}
 		</div>
 	);

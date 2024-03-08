@@ -12,13 +12,15 @@ import {
 	addActivityApi,
 	deleteActivityApi,
 } from '../features/activity/actions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Alert from '../components/Alert';
 
 const Dashboard = () => {
 	const { activities, activity, showModalDelete } = useSelector(
 		(state) => state.activity
 	);
 	const dispatch = useDispatch();
+	const [showAlert, setShowAlert] = useState(false);
 
 	const handleOnAdd = async () => {
 		try {
@@ -37,6 +39,7 @@ const Dashboard = () => {
 			await deleteActivityApi(activity.id);
 			dispatch(setShowModalDelete());
 			dispatch(fetchActivities());
+			dispatch(setShowAlert(true));
 		} catch (error) {
 			console.log(error);
 		}
@@ -73,6 +76,10 @@ const Dashboard = () => {
 					question={'Apakah anda yakin menghapus activity'}
 					item={`“${activity.title}”?`}
 				/>
+			</div>
+
+			<div className={showAlert ? '' : 'hidden'}>
+				<Alert onClick={() => setShowAlert(false)} />
 			</div>
 		</div>
 	);

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ActivityItem = ({ data }) => {
+const ActivityItem = ({ data, index }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const ActivityItem = ({ data }) => {
 	return (
 		<div
 			onClick={onClickItem}
-			data-cy="activity-item-index"
+			data-cy={'activity-item-' + index}
 			className=" aspect-square rounded-xl shadow-xl bg-white flex flex-col justify-between p-6 cursor-pointer"
 		>
 			<h6 data-cy="activity-item-title" className="text-lg font-bold">
@@ -54,4 +54,5 @@ export default ActivityItem;
 
 ActivityItem.propTypes = {
 	data: PropTypes.object,
+	index: PropTypes.object,
 };

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { updateTodoApi } from '../features/todo/actions';
 import { useParams } from 'react-router-dom';
 
-const Todo = ({ data }) => {
+const Todo = ({ data, index }) => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const priorities = {
@@ -37,7 +37,7 @@ const Todo = ({ data }) => {
 
 	return (
 		<div
-			data-cy="todo-item-index"
+			data-cy={'todo-item-' + index}
 			className="w-full flex justify-between p-7 bg-white rounded-xl shadow-xl"
 		>
 			<div className="flex gap-4 items-center">
@@ -87,4 +87,5 @@ export default Todo;
 
 Todo.propTypes = {
 	data: PropTypes.object,
+	index: PropTypes.number,
 };
