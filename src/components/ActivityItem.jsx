@@ -1,4 +1,7 @@
-import { setShowModalDelete } from '../features/activity/activitySlice';
+import {
+	setActivity,
+	setShowModalDelete,
+} from '../features/activity/activitySlice';
 import DeleteButton from './icons/DeleteButton';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +15,7 @@ const ActivityItem = ({ data }) => {
 	const onClickDelete = (e) => {
 		e.stopPropagation();
 		dispatch(setShowModalDelete());
+		dispatch(setActivity(data));
 	};
 
 	const convertDate = (stringDate) => {

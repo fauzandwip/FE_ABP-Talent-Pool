@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addActivityApi, fetchActivitiesApi } from './actions';
+import { fetchActivitiesApi } from './actions';
 
 export const activitySlice = createSlice({
 	name: 'activity',
 	initialState: {
 		activities: [],
+		activity: {
+			id: null,
+			title: '',
+		},
 		showModalDelete: false,
 	},
 	reducers: {
@@ -14,10 +18,14 @@ export const activitySlice = createSlice({
 		setActivities: (state, action) => {
 			state.activities = action.payload.data;
 		},
+		setActivity: (state, action) => {
+			state.activity = action.payload;
+		},
 	},
 });
 
-export const { setShowModalDelete, setActivities } = activitySlice.actions;
+export const { setShowModalDelete, setActivities, setActivity } =
+	activitySlice.actions;
 
 export const fetchActivities = () => async (dispatch) => {
 	const data = await fetchActivitiesApi();

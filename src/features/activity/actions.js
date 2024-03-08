@@ -13,3 +13,8 @@ export const addActivityApi = async (data) => {
 	await api.post('/activity-groups', data);
 	return;
 };
+
+export const deleteActivityApi = async (id) => {
+	await api.delete(`/activity-groups/${id}`);
+	return;
+};

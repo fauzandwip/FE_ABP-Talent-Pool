@@ -8,10 +8,14 @@ import {
 	fetchActivities,
 	setShowModalDelete,
 } from '../features/activity/activitySlice';
-import { addActivityApi } from '../features/activity/actions';
+import {
+	addActivityApi,
+	deleteActivityApi,
+} from '../features/activity/actions';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
-	const { activities, showModalDelete } = useSelector(
+	const { activities, activity, showModalDelete } = useSelector(
 		(state) => state.activity
 	);
 	const dispatch = useDispatch();
@@ -28,6 +32,20 @@ const Dashboard = () => {
 			console.log(error);
 		}
 	};
+
+	const handleOnDelete = async () => {
+		try {
+			await deleteActivityApi(activity.id);
+			dispatch(setShowModalDelete());
+			dispatch(fetchActivities());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		dispatch(fetchActivities());
+	}, []);
 
 	return (
 		<div
@@ -52,6 +70,7 @@ const Dashboard = () => {
 			<div className={showModalDelete ? '' : 'hidden'}>
 				<ModalDelete
 					onClickCancel={() => dispatch(setShowModalDelete())}
+					onClickDelete={handleOnDelete}
 					question={'Apakah anda yakin menghapus activity'}
 					item={'“Meeting dengan Client”?'}
 				/>
