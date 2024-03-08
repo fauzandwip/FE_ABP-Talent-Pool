@@ -2,7 +2,9 @@ import { setShowModalDelete } from '../features/activity/activitySlice';
 import DeleteButton from './icons/DeleteButton';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-const ActivityItem = () => {
+import PropTypes from 'prop-types';
+
+const ActivityItem = ({ data }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -12,6 +14,18 @@ const ActivityItem = () => {
 		dispatch(setShowModalDelete());
 	};
 
+	const convertDate = (stringDate) => {
+		const date = new Date(stringDate);
+		const options = {
+			day: '2-digit',
+			month: 'long',
+			year: 'numeric',
+		};
+
+		const newFormatDate = date.toLocaleDateString('id-ID', options);
+		return newFormatDate;
+	};
+
 	return (
 		<div
 			onClick={onClickItem}
@@ -19,12 +33,12 @@ const ActivityItem = () => {
 			className=" aspect-square rounded-xl shadow-xl bg-white flex flex-col justify-between p-6 cursor-pointer"
 		>
 			<h6 data-cy="activity-item-title" className="text-lg font-bold">
-				Activity Item
+				{data.title}
 			</h6>
 
 			<div className="flex justify-between">
 				<p data-cy="activity-item-date" className="text-gray-primary">
-					5 Oktober 2021
+					{convertDate(data.created_at)}
 				</p>
 				<DeleteButton onClick={onClickDelete} />
 			</div>
@@ -33,3 +47,7 @@ const ActivityItem = () => {
 };
 
 export default ActivityItem;
+
+ActivityItem.propTypes = {
+	data: PropTypes.object,
+};
