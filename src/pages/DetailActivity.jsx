@@ -20,7 +20,6 @@ const DetailActivity = () => {
 	const dispatch = useDispatch();
 	const { detailActivity, showModalAdd, showModalEdit, showModalDelete } =
 		useSelector((state) => state.todo);
-	// const [currentActivity, setCurrentActivity] = useState(detailActivity);
 
 	useEffect(() => {
 		dispatch(fetchDetailActivity(id));
@@ -64,7 +63,7 @@ const DetailActivity = () => {
 				<ModalDelete
 					onClickCancel={() => dispatch(setShowModalDelete())}
 					question={'Apakah anda yakin menghapus List Item'}
-					item={'Telur Ayam”?'}
+					item={'“Telur Ayam”?'}
 				/>
 			</div>
 		</div>

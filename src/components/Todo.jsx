@@ -6,6 +6,8 @@ import DeleteButton from './icons/DeleteButton';
 import EditButton from './icons/EditButton';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { updateTodoApi } from '../features/todo/actions';
 
 const Todo = ({ data }) => {
 	const dispatch = useDispatch();
@@ -15,6 +17,21 @@ const Todo = ({ data }) => {
 		normal: 'bg-teal-600',
 		low: 'bg-blue-500',
 		'very-low': 'bg-purple-600',
+	};
+	const [isActive, setIsActive] = useState(data.is_active);
+
+	const handleOnChangeActive = async () => {
+		try {
+			isActive ? setIsActive(0) : setIsActive(1);
+
+			await updateTodoApi(data.id, {
+				title: data.title,
+				priority: data.priority,
+				is_active: isActive ? 0 : 1,
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -29,7 +46,8 @@ const Todo = ({ data }) => {
 					name=""
 					id=""
 					className="w-5 h-5 aspect-square accent-blue-500"
-					checked={data['is_active'] ? '' : 'checked'}
+					checked={isActive ? '' : 'checked'}
+					onChange={handleOnChangeActive}
 				/>
 				<div
 					className={`aspect-square w-3 h-3 rounded-full ${
@@ -38,7 +56,9 @@ const Todo = ({ data }) => {
 				/>
 				<p
 					data-cy="todo-item-priority-indicator"
-					className="text-lg font-medium"
+					className={`text-lg font-medium ${
+						!isActive && 'line-through text-gray-primary'
+					}`}
 				>
 					{data.title}
 				</p>

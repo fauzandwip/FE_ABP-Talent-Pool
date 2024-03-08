@@ -9,3 +9,9 @@ export const addTodoApi = async (todo) => {
 	await api.post('/todo-items', todo);
 	return;
 };
+
+export const updateTodoApi = async (id, todo) => {
+	// console.log(id, todo);
+	await api.patch(`/todo-items/${id}`, todo);
+	return;
+};
