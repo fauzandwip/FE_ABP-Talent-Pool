@@ -5,22 +5,30 @@ import TodoList from '../components/TodoList';
 import TodoTitle from '../components/TodoTitle';
 import ModalDelete from '../components/ModalDelete';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import {
+	fetchDetailActivity,
 	setShowModalAdd,
 	setShowModalDelete,
 	setShowModalEdit,
 } from '../features/todo/todoSlice';
+import EmptyStateImage from '../components/EmptyStateImage';
+import { useEffect } from 'react';
 
 const DetailActivity = () => {
+	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { showModalAdd, showModalEdit, showModalDelete } = useSelector(
-		(state) => state.todo
-	);
+	const { detailActivity, showModalAdd, showModalEdit, showModalDelete } =
+		useSelector((state) => state.todo);
+
+	useEffect(() => {
+		dispatch(fetchDetailActivity(id));
+	}, []);
 
 	return (
 		<div
 			className={`px-56 min-h-screen pt-32 relative ${
-				showModalAdd || showModalDelete || setShowModalEdit
+				showModalAdd || showModalEdit || showModalDelete
 					? 'h-screen overflow-hidden'
 					: ''
 			}`}
@@ -34,11 +42,14 @@ const DetailActivity = () => {
 				</div>
 			</div>
 
-			{/* <EmptyStateImage
-				imageUrl={'./icons/todo-empty-state.svg'}
-				dataCy={'todo-empty-state'}
-			/> */}
-			<TodoList />
+			{detailActivity.todo_items.length ? (
+				<TodoList />
+			) : (
+				<EmptyStateImage
+					imageUrl={'/icons/todo-empty-state.svg'}
+					dataCy={'todo-empty-state'}
+				/>
+			)}
 
 			<div className={showModalAdd ? '' : 'hidden'}>
 				<ModalFormItem onClickClose={() => dispatch(setShowModalAdd())} />

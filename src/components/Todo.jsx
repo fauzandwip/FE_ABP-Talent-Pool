@@ -5,8 +5,17 @@ import {
 import DeleteButton from './icons/DeleteButton';
 import EditButton from './icons/EditButton';
 import { useDispatch } from 'react-redux';
-const Todo = () => {
+import PropTypes from 'prop-types';
+
+const Todo = ({ data }) => {
 	const dispatch = useDispatch();
+	const priorities = {
+		'very-high': 'bg-red-500',
+		high: 'bg-yellow-500',
+		medium: 'bg-teal-600',
+		low: 'bg-blue-500',
+		'very-low': 'bg-purple-600',
+	};
 
 	return (
 		<div
@@ -20,13 +29,18 @@ const Todo = () => {
 					name=""
 					id=""
 					className="w-5 h-5 aspect-square accent-blue-500"
+					checked={data['is_active'] ? '' : 'checked'}
 				/>
-				<div className=" aspect-square w-3 h-3 bg-red-500 rounded-full" />
+				<div
+					className={`aspect-square w-3 h-3 rounded-full ${
+						priorities[data.priority]
+					}`}
+				/>
 				<p
 					data-cy="todo-item-priority-indicator"
 					className="text-lg font-medium"
 				>
-					Todo
+					{data.title}
 				</p>
 				<EditButton
 					onClick={() => dispatch(setShowModalEdit())}
@@ -41,3 +55,7 @@ const Todo = () => {
 };
 
 export default Todo;
+
+Todo.propTypes = {
+	data: PropTypes.object,
+};

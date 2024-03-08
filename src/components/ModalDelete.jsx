@@ -5,7 +5,7 @@ const ModalDelete = ({ question, item, onClickCancel, onClickDelete }) => {
 		<div className=" absolute top-0 left-0 w-full h-screen z-50 bg-gray-800/70 flex justify-center items-center">
 			<div className="w-[490px] h-[355px] bg-white rounded-xl shadow-lg flex flex-col items-center justify-around py-10">
 				<div>
-					<img src="./icons/modal/modal-delete-icon.svg" />
+					<img src="/icons/modal/modal-delete-icon.svg" />
 				</div>
 
 				<div className="text-center">

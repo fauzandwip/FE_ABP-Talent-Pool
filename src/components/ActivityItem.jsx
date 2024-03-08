@@ -11,7 +11,7 @@ const ActivityItem = ({ data }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const onClickItem = () => navigate('/detail');
+	const onClickItem = () => navigate(`/detail/${data.id}`);
 	const onClickDelete = (e) => {
 		e.stopPropagation();
 		dispatch(setShowModalDelete());

@@ -15,7 +15,7 @@ const ModalFormItem = ({ onClickClose }) => {
 					</h5>
 					<button data-cy="modal-add-close-button" onClick={onClickClose}>
 						<img
-							src="./icons/modal-add-close-button.svg"
+							src="/icons/modal-add-close-button.svg"
 							className="  w-6 h-6"
 						/>
 					</button>

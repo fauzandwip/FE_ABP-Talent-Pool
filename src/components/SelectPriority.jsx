@@ -43,7 +43,7 @@ const SelectPriority = () => {
 					className="border border-gray-secondary rounded-md bg-white flex justify-between text-base font-normal px-5 py-4 w-60"
 				>
 					Pilih priority
-					<img src="./icons/chevron-down.svg" className="  w-6 h-6" />
+					<img src="/icons/chevron-down.svg" className="  w-6 h-6" />
 				</div>
 				<ul
 					tabIndex={0}

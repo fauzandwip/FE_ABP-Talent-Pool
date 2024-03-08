@@ -10,7 +10,7 @@ const SortItem = ({ data, index }) => {
 			>
 				<div className="flex gap-4">
 					<img
-						src={`./icons/sort/${data.iconUrl}`}
+						src={`/icons/sort/${data.iconUrl}`}
 						className="  w-[18px] h-[18px]"
 					/>
 					{data.title}

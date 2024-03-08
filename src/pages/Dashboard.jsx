@@ -72,7 +72,7 @@ const Dashboard = () => {
 					onClickCancel={() => dispatch(setShowModalDelete())}
 					onClickDelete={handleOnDelete}
 					question={'Apakah anda yakin menghapus activity'}
-					item={'“Meeting dengan Client”?'}
+					item={`“${activity.title}”?`}
 				/>
 			</div>
 		</div>
