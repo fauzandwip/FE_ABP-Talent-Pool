@@ -6,7 +6,7 @@ const DeleteButton = ({ onClick, ...props }) => {
 			<img
 				{...props}
 				data-cy="activity-item-delete-button"
-				src="./icons/trash.svg"
+				src="/icons/trash.svg"
 				className=" w-6 h-6"
 			/>
 		</button>

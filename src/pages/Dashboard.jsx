@@ -4,13 +4,50 @@ import AddButton from '../components/AddButton';
 import EmptyStateImage from '../components/EmptyStateImage';
 import ModalDelete from '../components/ModalDelete';
 import { useSelector, useDispatch } from 'react-redux';
-import { setShowModalDelete } from '../features/activity/activitySlice';
+import {
+	fetchActivities,
+	setShowModalDelete,
+} from '../features/activity/activitySlice';
+import {
+	addActivityApi,
+	deleteActivityApi,
+} from '../features/activity/actions';
+import { useEffect, useState } from 'react';
+import Alert from '../components/Alert';
 
 const Dashboard = () => {
-	const showModalDelete = useSelector(
-		(state) => state.activity.showModalDelete
+	const { activities, activity, showModalDelete } = useSelector(
+		(state) => state.activity
 	);
 	const dispatch = useDispatch();
+	const [showAlert, setShowAlert] = useState(false);
+
+	const handleOnAdd = async () => {
+		try {
+			await addActivityApi({
+				title: 'New Activity',
+				email: 'fauzandprasetyo@gmail.com',
+			});
+			dispatch(fetchActivities());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleOnDelete = async () => {
+		try {
+			await deleteActivityApi(activity.id);
+			dispatch(setShowModalDelete());
+			dispatch(fetchActivities());
+			dispatch(setShowAlert(true));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		dispatch(fetchActivities());
+	}, []);
 
 	return (
 		<div
@@ -20,21 +57,29 @@ const Dashboard = () => {
 		>
 			<div className="flex justify-between w-full mb-12">
 				<ActivityTitle />
-				<AddButton />
+				<AddButton onClick={handleOnAdd} />
 			</div>
 
-			{/* <EmptyStateImage
-				dataCy={'activity-empty-state'}
-				imageUrl={'/icons/activity-empty-state.svg'}
-			/> */}
-			<Activites />
+			{activities.length ? (
+				<Activites />
+			) : (
+				<EmptyStateImage
+					dataCy={'activity-empty-state'}
+					imageUrl={'/icons/activity-empty-state.svg'}
+				/>
+			)}
 
 			<div className={showModalDelete ? '' : 'hidden'}>
 				<ModalDelete
 					onClickCancel={() => dispatch(setShowModalDelete())}
+					onClickDelete={handleOnDelete}
 					question={'Apakah anda yakin menghapus activity'}
-					item={'“Meeting dengan Client”?'}
+					item={`“${activity.title}”?`}
 				/>
+			</div>
+
+			<div className={showAlert ? '' : 'hidden'}>
+				<Alert onClick={() => setShowAlert(false)} />
 			</div>
 		</div>
 	);

@@ -1,8 +1,13 @@
 import SaveButton from './SaveButton';
 import SelectPriority from './SelectPriority';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCurrentTodo } from '../features/todo/todoSlice';
 
-const ModalFormItem = ({ onClickClose }) => {
+const ModalFormItem = ({ onClickClose, onClickSave }) => {
+	const dispatch = useDispatch();
+	const { currentTodo } = useSelector((state) => state.todo);
+
 	return (
 		<div className="w-full h-screen absolute z-50 bg-gray-800/70 flex justify-center items-center top-0 left-0">
 			<div
@@ -15,7 +20,7 @@ const ModalFormItem = ({ onClickClose }) => {
 					</h5>
 					<button data-cy="modal-add-close-button" onClick={onClickClose}>
 						<img
-							src="./icons/modal-add-close-button.svg"
+							src="/icons/modal-add-close-button.svg"
 							className="  w-6 h-6"
 						/>
 					</button>
@@ -35,13 +40,20 @@ const ModalFormItem = ({ onClickClose }) => {
 							id=""
 							placeholder="Tambahkan nama list item"
 							className=" text-base font-normal placeholder:text-gray-secondary px-5 py-4 border border-gray-secondary rounded-md focus:outline focus:outline-1 focus:outline-blue-primary"
+							value={currentTodo.title}
+							onChange={(e) =>
+								dispatch(setCurrentTodo({ title: e.target.value }))
+							}
 						/>
 					</label>
-					<SelectPriority />
+					<SelectPriority priority={currentTodo.priority} />
 				</div>
 
-				<div className="flex justify-end items-center px-8 py-4">
-					<SaveButton />
+				<div className={`flex justify-end items-center px-8 py-4`}>
+					<SaveButton
+						onClick={onClickSave}
+						isDisabled={!(currentTodo.title && currentTodo.priority)}
+					/>
 				</div>
 			</div>
 		</div>
@@ -52,4 +64,5 @@ export default ModalFormItem;
 
 ModalFormItem.propTypes = {
 	onClickClose: PropTypes.func,
+	onClickSave: PropTypes.func,
 };

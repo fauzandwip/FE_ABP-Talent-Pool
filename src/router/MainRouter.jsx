@@ -13,7 +13,7 @@ const router = createBrowserRouter([
 				element: <Dashboard />,
 			},
 			{
-				path: '/detail',
+				path: 'detail/:id',
 				element: <DetailActivity />,
 			},
 		],

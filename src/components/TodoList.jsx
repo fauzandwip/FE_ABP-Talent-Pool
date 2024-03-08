@@ -1,15 +1,14 @@
-import { useState } from 'react';
 import Todo from './Todo';
+import { useSelector } from 'react-redux';
 
 const TodoList = () => {
-	const [todos, setTodos] = useState(Array(15).fill(0));
+	const { detailActivity } = useSelector((state) => state.todo);
 
 	return (
 		<div className="w-full flex flex-col gap-2.5 pb-10">
-			{todos.length &&
-				todos.map((_, index) => {
-					return <Todo key={index} />;
-				})}
+			{detailActivity.todo_items.map((data, index) => {
+				return <Todo key={index} data={data} index={index} />;
+			})}
 		</div>
 	);
 };
