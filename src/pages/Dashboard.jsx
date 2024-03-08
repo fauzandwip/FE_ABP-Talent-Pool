@@ -4,13 +4,30 @@ import AddButton from '../components/AddButton';
 import EmptyStateImage from '../components/EmptyStateImage';
 import ModalDelete from '../components/ModalDelete';
 import { useSelector, useDispatch } from 'react-redux';
-import { setShowModalDelete } from '../features/activity/activitySlice';
+import {
+	fetchActivities,
+	setShowModalDelete,
+} from '../features/activity/activitySlice';
+import { addActivityApi } from '../features/activity/actions';
 
 const Dashboard = () => {
-	const showModalDelete = useSelector(
-		(state) => state.activity.showModalDelete
+	const { activities, showModalDelete } = useSelector(
+		(state) => state.activity
 	);
 	const dispatch = useDispatch();
+
+	const handleOnAdd = async () => {
+		console.log('trigerr add');
+		try {
+			await addActivityApi({
+				title: 'New Activity',
+				email: 'fauzandprasetyo@gmail.com',
+			});
+			dispatch(fetchActivities());
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div
@@ -20,14 +37,17 @@ const Dashboard = () => {
 		>
 			<div className="flex justify-between w-full mb-12">
 				<ActivityTitle />
-				<AddButton />
+				<AddButton onClick={handleOnAdd} />
 			</div>
 
-			{/* <EmptyStateImage
-				dataCy={'activity-empty-state'}
-				imageUrl={'/icons/activity-empty-state.svg'}
-			/> */}
-			<Activites />
+			{activities.length ? (
+				<Activites />
+			) : (
+				<EmptyStateImage
+					dataCy={'activity-empty-state'}
+					imageUrl={'/icons/activity-empty-state.svg'}
+				/>
+			)}
 
 			<div className={showModalDelete ? '' : 'hidden'}>
 				<ModalDelete

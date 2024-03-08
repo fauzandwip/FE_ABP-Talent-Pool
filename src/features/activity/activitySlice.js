@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchActivitiesApi } from './actions';
+import { addActivityApi, fetchActivitiesApi } from './actions';
 
 export const activitySlice = createSlice({
 	name: 'activity',
@@ -19,9 +19,13 @@ export const activitySlice = createSlice({
 
 export const { setShowModalDelete, setActivities } = activitySlice.actions;
 
-export const fetchActivities = () => async (dispacth) => {
+export const fetchActivities = () => async (dispatch) => {
 	const data = await fetchActivitiesApi();
-	dispacth(setActivities(data));
+	dispatch(setActivities(data));
 };
+
+// export const addActivity = (data) => async (dispatch) => {
+// 	await addActivityApi(data);
+// };
 
 export default activitySlice.reducer;

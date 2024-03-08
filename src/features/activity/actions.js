@@ -8,3 +8,8 @@ export const fetchActivitiesApi = async () => {
 	// console.log(data);
 	return data;
 };
+
+export const addActivityApi = async (data) => {
+	await api.post('/activity-groups', data);
+	return;
+};
