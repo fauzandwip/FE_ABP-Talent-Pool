@@ -1,7 +1,11 @@
 import CustomOption from './CustomOption';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentTodo } from '../features/todo/todoSlice';
 
-const SelectPriority = ({ priority, setPriority }) => {
+const SelectPriority = () => {
+	const dispatch = useDispatch();
+	const { currentTodo } = useSelector((state) => state.todo);
+
 	const priorityOptions = [
 		{
 			priority: 'very-high',
@@ -35,6 +39,17 @@ const SelectPriority = ({ priority, setPriority }) => {
 		},
 	];
 
+	const getIndex = () => {
+		const index = priorityOptions.findIndex(
+			(el) => el.priority === currentTodo.priority
+		);
+		return index;
+	};
+
+	const getValue = (key) => {
+		return priorityOptions[getIndex()][key];
+	};
+
 	return (
 		<label
 			htmlFor=""
@@ -48,16 +63,10 @@ const SelectPriority = ({ priority, setPriority }) => {
 					role="button"
 					className="border border-gray-secondary rounded-md bg-white flex justify-between text-base font-normal px-5 py-4 w-60"
 				>
-					{priority.index !== null ? (
+					{getIndex() !== -1 ? (
 						<div className="flex gap-4 items-center">
-							<div
-								className={`w-3 h-3 rounded-full ${
-									priorityOptions[priority.index].color
-								}`}
-							/>
-							<a className="text-base">
-								{priorityOptions[priority.index].title}
-							</a>
+							<div className={`w-3 h-3 rounded-full ${getValue('color')}`} />
+							<a className="text-base">{getValue('title')}</a>
 						</div>
 					) : (
 						<p>Pilih priority</p>
@@ -73,8 +82,9 @@ const SelectPriority = ({ priority, setPriority }) => {
 							<CustomOption
 								key={index}
 								data={data}
-								onClick={() => setPriority({ priority: data.priority, index })}
-								isSelected={priority.index === index}
+								onClick={() =>
+									dispatch(setCurrentTodo({ priority: data.priority }))
+								}
 							/>
 						);
 					})}
@@ -85,8 +95,3 @@ const SelectPriority = ({ priority, setPriority }) => {
 };
 
 export default SelectPriority;
-
-SelectPriority.propTypes = {
-	priority: PropTypes.object,
-	setPriority: PropTypes.func,
-};

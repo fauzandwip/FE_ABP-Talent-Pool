@@ -9,6 +9,11 @@ export const todoSlice = createSlice({
 			title: '',
 			todo_items: [],
 		},
+		currentTodo: {
+			title: '',
+			is_active: false,
+			priority: '',
+		},
 		showModalAdd: false,
 		showModalEdit: false,
 		showModalDelete: false,
@@ -30,11 +35,24 @@ export const todoSlice = createSlice({
 		setDetailActivity: (state, action) => {
 			state.detailActivity = action.payload;
 		},
+		setCurrentTodo: (state, action) => {
+			console.log(action.payload);
+			if (action.payload) {
+				state.currentTodo = { ...state.currentTodo, ...action.payload };
+			} else {
+				state.currentTodo = {
+					title: '',
+					is_active: false,
+					priority: '',
+				};
+			}
+		},
 	},
 });
 
 export const {
 	setDetailActivity,
+	setCurrentTodo,
 	setShowModalAdd,
 	setShowModalEdit,
 	setShowModalDelete,

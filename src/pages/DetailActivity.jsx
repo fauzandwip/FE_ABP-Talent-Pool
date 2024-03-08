@@ -8,18 +8,53 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
 	fetchDetailActivity,
+	setCurrentTodo,
 	setShowModalAdd,
 	setShowModalDelete,
 	setShowModalEdit,
 } from '../features/todo/todoSlice';
 import EmptyStateImage from '../components/EmptyStateImage';
 import { useEffect } from 'react';
+import { addTodoApi, updateTodoApi } from '../features/todo/actions';
 
 const DetailActivity = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { detailActivity, showModalAdd, showModalEdit, showModalDelete } =
-		useSelector((state) => state.todo);
+	const {
+		detailActivity,
+		currentTodo,
+		showModalAdd,
+		showModalEdit,
+		showModalDelete,
+	} = useSelector((state) => state.todo);
+
+	const handleOnSave = async () => {
+		try {
+			await addTodoApi({
+				title: currentTodo.title,
+				priority: currentTodo.priority,
+				activity_group_id: detailActivity.id,
+			});
+
+			dispatch(setCurrentTodo(null));
+			dispatch(fetchDetailActivity(detailActivity.id));
+			dispatch(setShowModalAdd());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleOnUpdate = async () => {
+		try {
+			await updateTodoApi(currentTodo.id, currentTodo);
+
+			dispatch(setCurrentTodo(null));
+			dispatch(fetchDetailActivity(detailActivity.id));
+			dispatch(setShowModalEdit());
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		dispatch(fetchDetailActivity(id));
@@ -52,11 +87,20 @@ const DetailActivity = () => {
 			)}
 
 			<div className={showModalAdd ? '' : 'hidden'}>
-				<ModalFormItem onClickClose={() => dispatch(setShowModalAdd())} />
+				<ModalFormItem
+					onClickSave={handleOnSave}
+					onClickClose={() => dispatch(setShowModalAdd())}
+				/>
 			</div>
 
 			<div className={showModalEdit ? '' : 'hidden'}>
-				<ModalFormItem onClickClose={() => dispatch(setShowModalEdit())} />
+				<ModalFormItem
+					onClickSave={handleOnUpdate}
+					onClickClose={() => {
+						dispatch(setCurrentTodo(null));
+						dispatch(setShowModalEdit());
+					}}
+				/>
 			</div>
 
 			<div className={showModalDelete ? '' : 'hidden'}>

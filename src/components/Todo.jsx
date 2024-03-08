@@ -1,4 +1,5 @@
 import {
+	setCurrentTodo,
 	setShowModalDelete,
 	setShowModalEdit,
 } from '../features/todo/todoSlice';
@@ -63,7 +64,10 @@ const Todo = ({ data }) => {
 					{data.title}
 				</p>
 				<EditButton
-					onClick={() => dispatch(setShowModalEdit())}
+					onClick={() => {
+						dispatch(setCurrentTodo(data));
+						dispatch(setShowModalEdit());
+					}}
 					data-cy={'todo-item-edit-button"'}
 					className="w-5 h-5"
 				/>
