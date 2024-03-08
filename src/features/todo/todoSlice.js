@@ -58,8 +58,11 @@ export const {
 	setShowSortList,
 } = todoSlice.actions;
 
-export const fetchDetailActivity = (id) => async (dispatch) => {
-	const data = await fetchDetailActivityApi(id);
+export const fetchDetailActivity = (id, eventSort) => async (dispatch) => {
+	let data = await fetchDetailActivityApi(id);
+	if (eventSort) {
+		data.todo_items = eventSort(data.todo_items);
+	}
 	dispatch(setDetailActivity(data));
 };
 

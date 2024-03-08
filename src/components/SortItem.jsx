@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const SortItem = ({ data, index }) => {
+const SortItem = ({ data, index, onClick }) => {
 	return (
-		<li data-cy={data['data-cy']}>
+		<li data-cy={data['data-cy']} onClick={onClick}>
 			<button
 				className={`flex w-full justify-between px-5 py-4 ${
 					index === 0 ? '' : 'border-t border-gray-secondary'
@@ -26,4 +26,5 @@ export default SortItem;
 SortItem.propTypes = {
 	data: PropTypes.object,
 	index: PropTypes.number,
+	onClick: PropTypes.func,
 };

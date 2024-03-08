@@ -8,7 +8,6 @@ import DeleteButton from './icons/DeleteButton';
 import EditButton from './icons/EditButton';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import { updateTodoApi } from '../features/todo/actions';
 import { useParams } from 'react-router-dom';
 
@@ -22,16 +21,13 @@ const Todo = ({ data }) => {
 		low: 'bg-blue-500',
 		'very-low': 'bg-purple-600',
 	};
-	const [isActive, setIsActive] = useState(data.is_active);
 
 	const handleOnChangeActive = async () => {
 		try {
-			isActive ? setIsActive(0) : setIsActive(1);
-
 			await updateTodoApi(data.id, {
 				title: data.title,
 				priority: data.priority,
-				is_active: isActive ? 0 : 1,
+				is_active: data.is_active ? 0 : 1,
 			});
 			dispatch(fetchDetailActivity(id));
 		} catch (error) {
@@ -51,7 +47,7 @@ const Todo = ({ data }) => {
 					name=""
 					id=""
 					className="w-5 h-5 aspect-square accent-blue-500"
-					checked={isActive ? '' : 'checked'}
+					checked={data.is_active ? '' : 'checked'}
 					onChange={handleOnChangeActive}
 				/>
 				<div
@@ -62,7 +58,7 @@ const Todo = ({ data }) => {
 				<p
 					data-cy="todo-item-priority-indicator"
 					className={`text-lg font-medium ${
-						!isActive && 'line-through text-gray-primary'
+						!data.is_active && 'line-through text-gray-primary'
 					}`}
 				>
 					{data.title}
