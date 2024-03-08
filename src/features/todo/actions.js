@@ -5,6 +5,11 @@ export const fetchDetailActivityApi = async (id) => {
 	return data;
 };
 
+export const updateActivityTitle = async (id, title) => {
+	await api.patch(`/activity-groups/${id}`, { title });
+	return;
+};
+
 export const addTodoApi = async (todo) => {
 	await api.post('/todo-items', todo);
 	return;

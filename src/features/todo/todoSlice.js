@@ -33,7 +33,7 @@ export const todoSlice = createSlice({
 			state.showSortList = state.showSortList ? false : true;
 		},
 		setDetailActivity: (state, action) => {
-			state.detailActivity = action.payload;
+			state.detailActivity = { ...state.detailActivity, ...action.payload };
 		},
 		setCurrentTodo: (state, action) => {
 			if (action.payload) {

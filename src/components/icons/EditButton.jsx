@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const EditButton = ({ ...props }) => {
 	return (
 		<button {...props}>
@@ -9,7 +7,3 @@ const EditButton = ({ ...props }) => {
 };
 
 export default EditButton;
-
-EditButton.propTypes = {
-	dataCy: PropTypes.string,
-};
