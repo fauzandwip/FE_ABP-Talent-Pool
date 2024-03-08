@@ -15,7 +15,11 @@ import {
 } from '../features/todo/todoSlice';
 import EmptyStateImage from '../components/EmptyStateImage';
 import { useEffect } from 'react';
-import { addTodoApi, updateTodoApi } from '../features/todo/actions';
+import {
+	addTodoApi,
+	deleteTodoApi,
+	updateTodoApi,
+} from '../features/todo/actions';
 
 const DetailActivity = () => {
 	const { id } = useParams();
@@ -51,6 +55,18 @@ const DetailActivity = () => {
 			dispatch(setCurrentTodo(null));
 			dispatch(fetchDetailActivity(detailActivity.id));
 			dispatch(setShowModalEdit());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleOnDelete = async () => {
+		try {
+			console.log(currentTodo);
+			await deleteTodoApi(currentTodo.id);
+			dispatch(setShowModalDelete());
+			dispatch(setCurrentTodo(null));
+			dispatch(fetchDetailActivity(id));
 		} catch (error) {
 			console.log(error);
 		}
@@ -106,8 +122,9 @@ const DetailActivity = () => {
 			<div className={showModalDelete ? '' : 'hidden'}>
 				<ModalDelete
 					onClickCancel={() => dispatch(setShowModalDelete())}
+					onClickDelete={handleOnDelete}
 					question={'Apakah anda yakin menghapus List Item'}
-					item={'“Telur Ayam”?'}
+					item={`“${currentTodo.title}”?`}
 				/>
 			</div>
 		</div>

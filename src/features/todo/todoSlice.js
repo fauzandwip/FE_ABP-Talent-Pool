@@ -36,7 +36,6 @@ export const todoSlice = createSlice({
 			state.detailActivity = action.payload;
 		},
 		setCurrentTodo: (state, action) => {
-			console.log(action.payload);
 			if (action.payload) {
 				state.currentTodo = { ...state.currentTodo, ...action.payload };
 			} else {

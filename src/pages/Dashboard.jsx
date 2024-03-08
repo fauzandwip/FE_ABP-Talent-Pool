@@ -21,7 +21,6 @@ const Dashboard = () => {
 	const dispatch = useDispatch();
 
 	const handleOnAdd = async () => {
-		console.log('trigerr add');
 		try {
 			await addActivityApi({
 				title: 'New Activity',

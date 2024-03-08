@@ -1,4 +1,5 @@
 import {
+	fetchDetailActivity,
 	setCurrentTodo,
 	setShowModalDelete,
 	setShowModalEdit,
@@ -9,8 +10,10 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { updateTodoApi } from '../features/todo/actions';
+import { useParams } from 'react-router-dom';
 
 const Todo = ({ data }) => {
+	const { id } = useParams();
 	const dispatch = useDispatch();
 	const priorities = {
 		'very-high': 'bg-red-500',
@@ -30,6 +33,7 @@ const Todo = ({ data }) => {
 				priority: data.priority,
 				is_active: isActive ? 0 : 1,
 			});
+			dispatch(fetchDetailActivity(id));
 		} catch (error) {
 			console.log(error);
 		}
@@ -73,7 +77,12 @@ const Todo = ({ data }) => {
 				/>
 			</div>
 
-			<DeleteButton onClick={() => dispatch(setShowModalDelete())} />
+			<DeleteButton
+				onClick={() => {
+					dispatch(setCurrentTodo(data));
+					dispatch(setShowModalDelete());
+				}}
+			/>
 		</div>
 	);
 };
