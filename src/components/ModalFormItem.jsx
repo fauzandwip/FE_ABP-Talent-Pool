@@ -1,8 +1,49 @@
+import { useState } from 'react';
 import SaveButton from './SaveButton';
 import SelectPriority from './SelectPriority';
 import PropTypes from 'prop-types';
+import { addTodoApi } from '../features/todo/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+	fetchDetailActivity,
+	setShowModalAdd,
+} from '../features/todo/todoSlice';
 
 const ModalFormItem = ({ onClickClose }) => {
+	const dispatch = useDispatch();
+	const { detailActivity } = useSelector((state) => state.todo);
+
+	const [title, setTitle] = useState('');
+	const [priority, setPriority] = useState({
+		priority: '',
+		index: null,
+	});
+
+	const handleOnSave = async () => {
+		try {
+			// console.log({
+			// 	title,
+			// 	priority: priority.priority,
+			// 	activity_group_id: detailActivity.id,
+			// });
+
+			await addTodoApi({
+				title,
+				priority: priority.priority,
+				activity_group_id: detailActivity.id,
+			});
+
+			setPriority({
+				priority: '',
+				index: null,
+			});
+			dispatch(fetchDetailActivity(detailActivity.id));
+			dispatch(setShowModalAdd());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div className="w-full h-screen absolute z-50 bg-gray-800/70 flex justify-center items-center top-0 left-0">
 			<div
@@ -35,13 +76,18 @@ const ModalFormItem = ({ onClickClose }) => {
 							id=""
 							placeholder="Tambahkan nama list item"
 							className=" text-base font-normal placeholder:text-gray-secondary px-5 py-4 border border-gray-secondary rounded-md focus:outline focus:outline-1 focus:outline-blue-primary"
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
 						/>
 					</label>
-					<SelectPriority />
+					<SelectPriority priority={priority} setPriority={setPriority} />
 				</div>
 
-				<div className="flex justify-end items-center px-8 py-4">
-					<SaveButton />
+				<div className={`flex justify-end items-center px-8 py-4`}>
+					<SaveButton
+						onClick={handleOnSave}
+						isDisabled={!(title && priority.priority)}
+					/>
 				</div>
 			</div>
 		</div>

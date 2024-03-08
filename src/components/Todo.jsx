@@ -12,7 +12,7 @@ const Todo = ({ data }) => {
 	const priorities = {
 		'very-high': 'bg-red-500',
 		high: 'bg-yellow-500',
-		medium: 'bg-teal-600',
+		normal: 'bg-teal-600',
 		low: 'bg-blue-500',
 		'very-low': 'bg-purple-600',
 	};

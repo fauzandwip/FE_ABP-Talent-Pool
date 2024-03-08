@@ -20,6 +20,7 @@ const DetailActivity = () => {
 	const dispatch = useDispatch();
 	const { detailActivity, showModalAdd, showModalEdit, showModalDelete } =
 		useSelector((state) => state.todo);
+	// const [currentActivity, setCurrentActivity] = useState(detailActivity);
 
 	useEffect(() => {
 		dispatch(fetchDetailActivity(id));
